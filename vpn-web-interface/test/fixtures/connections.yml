@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  source_ip: MyString
+  remote_ip: MyString
+  protocol: MyString
+  connection_started_time: 2017-08-01 14:51:59
+  connection_ended_time: 2017-08-01 14:51:59
+
+two:
+  username: MyString
+  source_ip: MyString
+  remote_ip: MyString
+  protocol: MyString
+  connection_started_time: 2017-08-01 14:51:59
+  connection_ended_time: 2017-08-01 14:51:59

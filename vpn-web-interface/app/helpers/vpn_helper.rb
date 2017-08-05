@@ -1,0 +1,2 @@
+module VpnHelper
+end
