@@ -7,3 +7,7 @@ default['vpn']['pam_service']	= "gate-sso"
 
 default['nss_cache']['api_key']		= "defaultapikey"
 default['nss_cache']['gate_host']	= "https://192.168.1.1/nss"
+
+default['pam_gate']['url'] = ENV['GATE_URL']
+default['pam_gate']['token'] = ENV['GATE_TOKEN']
+default['pam_gate']['min_user_id'] = "500"
