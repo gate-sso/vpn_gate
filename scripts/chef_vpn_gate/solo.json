@@ -1,0 +1,6 @@
+{
+    "run_list": [
+          "recipe[vpn-gate::pam_gate]",
+          "recipe[vpn-gate::strongswan-vpn]"
+    ]
+}
