@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 auth sufficient pam_gate.so url=<%= node[:pam_gate][:auth_url] %> token=<%= node[:pam_gate][:token] %> min_user_id=<%= node[:pam_gate][:min_user_id %>
 account sufficient pam_gate.so url=<%= node[:pam_gate][:auth_url] %> token=<%= node[:pam_gate][:token] %> min_user_id=<%= node[:pam_gate][:min_user_id %>
+=======
+auth sufficient pam_gate.so url="<%= node[:pam_gate][:url] %>" token="<%= node[:pam_gate][:token] %>" min_user_id=<%= node[:pam_gate][:min_user_id] %>
+account sufficient pam_gate.so url="<%= node[:pam_gate][:url] %>" token="<%= node[:pam_gate][:token] %>" min_user_id=<%= node[:pam_gate][:min_user_id] %>
+>>>>>>> fec21185ac552f18497b1102d599e7aba69eff68
