@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-   get 'welcome/index'
-   get 'vpn/index'
-   get 'vpn/test'
-
-   resources :connections
-
-   root 'welcome#index'
+   
+    get    '/',   to: 'sessions#new'
+    post   '/',   to: 'sessions#create'
+    delete '/logout',  to: 'sessions#destroy'
+   
 end
