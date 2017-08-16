@@ -29,7 +29,7 @@ cookbook_file "/bin/gate-nss-cache" do
 end
 
 cron 'adding cron for gate nss cache ' do
-    minute '*/5'
+    hour '*/3'
     command %W{
         GATE_CONFIG_FILE="/etc/gate/nss.yml"
         /bin/gate-nss-cache

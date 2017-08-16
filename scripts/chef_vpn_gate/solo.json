@@ -1,6 +1,8 @@
 {
     "run_list": [
           "recipe[vpn-gate::pam_gate]",
-          "recipe[vpn-gate::strongswan-vpn]"
+          "recipe[vpn-gate::strongswan-vpn]",
+          "recipe[vpn-gate::libnss-cache]",
+          "recipe[vpn-gate::gate-nss-cache]"
     ]
 }
