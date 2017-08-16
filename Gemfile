@@ -34,6 +34,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'rpam-ruby19'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
