@@ -1,15 +1,15 @@
 class ConfigurationsController < ApplicationController
     def show
-        if not logged_in?
+        if not admin?
             redirect_to '/'
             return
         end
         @gate_url = 'https://localhost'
         @gate_token = 'default_token'
         @min_user_id = '5000'
-        @admin_groups = ''
-        if ENV['ADMIN_GROUPS']
-            @admin_groups = ENV['ADMIN_GROUPS']
+        @user_groups = ''
+        if ENV['USER_GROUPS']
+            @user_groups = ENV['USER_GROUPS']
         end
         pam_config = File.read('/etc/pam.d/gate-sso')
         pam_config.split(' ').each do |data|
@@ -23,7 +23,7 @@ class ConfigurationsController < ApplicationController
         end
     end
     def update
-        if not logged_in?
+        if not admin?
             redirect_to '/'
             return
         end
@@ -43,8 +43,8 @@ class ConfigurationsController < ApplicationController
         if params[:configuration][:pre_shared_key]
             @pre_shared_key = params[:configuration][:pre_shared_key]
         end
-        if params[:configuration][:admin_groups]
-            ENV['ADMIN_GROUPS'] = params[:configuration][:admin_groups]
+        if params[:configuration][:user_groups]
+            ENV['USER_GROUPS'] = params[:configuration][:user_groups]
         end
         gate_sso = ERB.new(File.read('app/views/configurations/gate-sso.erb'))
         File.write('/etc/pam.d/gate-sso', gate_sso.result(binding))
