@@ -1,8 +1,20 @@
-= link_to "Log out", logout_path, :method => :delete
-= link_to "Connections", connection_path
-= link_to "VPN Configuration", connection_configure_path
-- if admin?
-  = link_to "Gate Configuration", configuration_path
+nav.navbar.navbar-default
+  div.container-fluid
+    div.navbar-header
+      a.navbar-brand Gojek VPN
+    
+    ul.nav.navbar-nav
+      li
+        = link_to "Connections", connection_path
+      li
+        = link_to "VPN Configuration", connection_configure_path
+      li
+        - if admin?
+          = link_to "Gate Configuration", configuration_path
+    
+    ul.nav.navbar-nav.navbar-right
+      li
+        = link_to "Log out", logout_path, :method => :delete
 
 .row
   .col-md-6.col-md-offset-3
