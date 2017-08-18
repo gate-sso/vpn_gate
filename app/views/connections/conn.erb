@@ -1,0 +1,16 @@
+conn <%= conn_name %>
+    keyexchange=ikev1
+    aggressive=<%= aggressive %>
+    type=tunnel
+    ike=aes256-sha1-modp1024,3des-sha1-modp1024!
+    esp=aes256-sha1,3des-sha1!
+    forceencaps=yes
+    leftsubnet=<%= leftsubnet %>
+    leftauth=psk
+    leftfirewall=yes
+    right=%any
+    rightauth=psk
+    rightauth2=xauth-pam
+    rightsourceip=<%= rightsourceip %>
+    auto=add
+

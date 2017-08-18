@@ -1,0 +1,36 @@
+= link_to "Log out", logout_path, :method => :delete
+= link_to "Connections", connection_path
+= link_to "Gate Configuration", configuration_path
+= link_to "VPN Configuration", connection_configure_path
+#connections
+
+javascript:
+  function conn_json_to_html(conns) {
+    var html_data = "";
+    for (var i in conns) {
+      var conn = conns[i];
+      html_data += "<tr>" + "<td>" + conn["username"] + "</td>" + "</tr>";
+      html_data += "<br>";
+      html_data += "<tr>" + "<td>" + conn["protocol"] + "</td>" + "</tr>";
+      html_data += "<br>";
+      html_data += "<tr>" + "<td>" + conn["source_ip"] + " - " + conn["virtual_ip"] + "</td>" + "</tr>"; 
+      html_data += "<br>";
+      html_data += "<tr>" + "<td>" + conn["established"] + "<td>" + "<tr>";
+      html_data += "<br>";
+    }
+    return html_data;
+  }
+  var f, refresh_rate;
+  refresh_rate = 1000;
+  setTimeout(f = (function() {
+    $.ajax({
+      url: "/connection/sas"
+    }).done(function(datas) {
+      return $("#connections").html(conn_json_to_html(datas));
+    });
+    if (window.location.pathname == "/connection") {
+        refresh_rate = 5000;
+        return setTimeout(f, refresh_rate);
+    }
+  }), refresh_rate);
+

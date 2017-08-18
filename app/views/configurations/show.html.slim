@@ -1,0 +1,23 @@
+= link_to "Log out", logout_path, :method => :delete
+= link_to "Connections", connection_path
+= link_to "Gate Configuration", configuration_path
+= link_to "VPN Configuration", connection_configure_path
+
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(:configuration, url: '/configuration') do |f|
+
+      = f.label :gate_url, "Gate Server URL"
+      = f.text_field :gate_url, class: 'form-control', value: @gate_url
+
+      = f.label :gate_token, "Gate Token"
+      = f.text_field :gate_token, class: 'form-control', value: @gate_token
+
+      = f.label :min_user_id, "Minimum User ID"
+      = f.number_field :min_user_id, class: 'form-control', value: @min_user_id
+
+      = f.label :pre_shared_key, "Pre-Shared Key"
+      = f.text_field :pre_shared_key, class: 'form-control', value: @pre_shared_key
+
+      = f.submit "Apply", class: "btn btn-primary"
+

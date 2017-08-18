@@ -2,14 +2,12 @@ config setup
     charondebug="ike 1, knl 1, cfg 0"
     uniqueids=no
 
-conn ikev1-vpn-main
+conn vpn-main
     keyexchange=ikev1
     type=tunnel
     ike=aes256-sha1-modp1024,3des-sha1-modp1024!
     esp=aes256-sha1,3des-sha1!
     forceencaps=yes
-    left=%any
-    leftid=<%= node[:vpn][:leftid] %>
     leftsubnet=<%= node[:vpn][:leftsubnet] %>
     leftauth=psk
     leftfirewall=yes
@@ -20,15 +18,13 @@ conn ikev1-vpn-main
     auto=add
 
 <% if node[:vpn][:aggressive] %>
-conn ikev1-vpn-aggresive
+conn vpn-aggresive
     keyexchange=ikev1
     aggressive=yes
     type=tunnel
     ike=aes256-sha1-modp1024,3des-sha1-modp1024!
     esp=aes256-sha1,3des-sha1!
     forceencaps=yes
-    left=%any
-    leftid=<%= node[:vpn][:leftid] %>
     leftsubnet=<%= node[:vpn][:leftsubnet] %>
     leftauth=psk
     leftfirewall=yes

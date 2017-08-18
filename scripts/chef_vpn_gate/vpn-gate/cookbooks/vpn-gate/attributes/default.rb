@@ -1,4 +1,3 @@
-default['vpn']['leftid'] = "gate-vpn"
 default['vpn']['leftsubnet'] = "192.168.0.0/16"
 default['vpn']['rightsourceip'] = "192.168.0.2/16"
 default['vpn']['aggressive'] = true
