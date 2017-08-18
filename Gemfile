@@ -29,6 +29,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'puma'
 gem 'slim-rails'
 gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
