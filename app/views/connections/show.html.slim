@@ -7,7 +7,7 @@ nav.navbar.navbar-default
       li
         = link_to "Connections", connection_path
       li
-        = link_to "VPN Configuration", connection_configure_path
+        = link_to "VPN Configuration", connection_configure_path      
       li
         - if admin?
           = link_to "Gate Configuration", configuration_path
@@ -48,3 +48,24 @@ javascript:
     }
   }), refresh_rate);
 
+
+div.container
+  h2 Dummy Table
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th name_user
+        th name_connection
+        th source ip - right ip
+        th time_connection
+    tbody
+      tr
+        td andi
+        td IKEV2 - main
+        td 192.168.32.31 - 10.10.10.10
+        td 15
+      tr
+        td budy
+        td IKEV2 - agresive
+        td 192.168.53.11 - 10.10.115.16
+        td 99
