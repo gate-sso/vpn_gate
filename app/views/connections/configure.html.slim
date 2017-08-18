@@ -1,3 +1,41 @@
+
+nav.navbar.navbar-default
+  div.container-fluid
+    div.navbar-header
+      a.navbar-brand Gojek VPN
+    
+    ul.nav.navbar-nav
+      li
+        = link_to "Connections", connection_path
+        
+      li.dropdown
+        a.dropdown-toggle data-toggle="dropdown" href="#" 
+          | Dropdown
+          span.caret
+        ul.dropdown-menu role="menu" 
+          li
+            a href="#"  Action
+          li
+            a href="#"  Another action
+          li
+            a href="#"  Something else here
+          li.divider
+            li
+              a href="#"  Separated link
+            li.divider
+            li
+              a href="#"  One more separated link
+
+      li
+        = link_to "VPN Configuration", connection_configure_path
+      li
+        - if admin?
+          = link_to "Gate Configuration", configuration_path
+
+    ul.nav.navbar-nav.navbar-right
+      li
+        = link_to "Log out", logout_path, :method => :delete
+
 = link_to "Log out", logout_path, :method => :delete
 = link_to "Connections", connection_path
 = link_to "VPN Configuration", connection_configure_path
