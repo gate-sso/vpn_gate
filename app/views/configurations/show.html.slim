@@ -1,7 +1,8 @@
 = link_to "Log out", logout_path, :method => :delete
 = link_to "Connections", connection_path
-= link_to "Gate Configuration", configuration_path
 = link_to "VPN Configuration", connection_configure_path
+- if admin?
+  = link_to "Gate Configuration", configuration_path
 
 .row
   .col-md-6.col-md-offset-3
@@ -16,8 +17,8 @@
       = f.label :min_user_id, "Minimum User ID"
       = f.number_field :min_user_id, class: 'form-control', value: @min_user_id
 
-      = f.label :pre_shared_key, "Pre-Shared Key"
-      = f.text_field :pre_shared_key, class: 'form-control', value: @pre_shared_key
+      = f.label :admin_groups, "Admin Groups"
+      = f.text_field :admin_groups, class: 'form-control', value: @admin_groups
 
       = f.submit "Apply", class: "btn btn-primary"
 

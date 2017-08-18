@@ -9,12 +9,22 @@ class SessionsController < ApplicationController
   def create
     username = params[:session][:username]
     password = params[:session][:password]
-    if Rpam.auth(username, password, :service => 'common-auth') == true then
+    admin_groups = ENV['ADMIN_GROUPS'].split(';')
+    if (username == ENV['ADMIN_USERNAME'] and password == ENV['ADMIN_PASSWORD']) then
       log_in username
       redirect_to '/connection'
-    else
-      render 'new'
+      return
+    elsif Rpam.auth(username, password, :service => 'common-auth') == true then
+      admin_groups.each do |group|
+        group = group.strip()
+        if (`id -G #{username}`.include? group or `groups #{username}`.include? group) then
+          log_in username
+          redirect_to '/connection'
+          return
+        end
+      end
     end
+    redirect_to '/'
   end
   def destroy
     log_out

@@ -52,6 +52,7 @@ class ConnectionsController < ApplicationController
         @left_subnet = nil
         @virtual_ip = nil
         @aggressive = false
+        @pre_shared_key = ''
         File.open('/etc/ipsec.conf').each do |line|
             if (line.include? 'conn') then
                 @conns.push(line.strip().sub(/conn /, ''))
@@ -74,6 +75,12 @@ class ConnectionsController < ApplicationController
                 end
             end
         end
+        ipsec_secrets = File.read('/etc/ipsec.secrets')
+        ipsec_secrets.split("\n").each do |line|
+            if line.include? 'PSK' and line.split(" ")[0] == conn_name
+                @pre_shared_key = line.split(' ')[-1]
+            end
+        end
         if (not conn_found) then
             redirect_to '/connection/configure'
             return
@@ -91,6 +98,7 @@ class ConnectionsController < ApplicationController
 
         leftsubnet = params[:connection][:left_subnet]
         rightsourceip = params[:connection][:virtual_ip]
+        pre_shared_key = params[:connection][:pre_shared_key]
         if params[:connection][:aggressive] == '1' then
             aggressive = 'yes'
         else
@@ -99,7 +107,15 @@ class ConnectionsController < ApplicationController
 
         renderer = ERB.new(File.read('app/views/connections/conn.erb'))
         add_conn = renderer.result(binding)
+        ipsec_secrets = ''
 
+        File.open('/etc/ipsec.secrets').each do |line|
+            if (line.split(' ')[0] == conn_name)
+                ipsec_secrets += conn_name + " : PSK " + pre_shared_key + "\n"
+            else
+                ipsec_secrets += line
+            end
+        end
         File.open('/etc/ipsec.conf').each do |line|
             if (processing_done) then
                 ipsec_conf += line
@@ -121,7 +137,8 @@ class ConnectionsController < ApplicationController
         end
 
         File.write('/etc/ipsec.conf', ipsec_conf)
-        `ipsec reload`
+        File.write('/etc/ipsec.secrets', ipsec_secrets)
+        `ipsec reload && ipsec rereadsecrets`
 
         conn_configuration_path = '/connection/configure/' + conn_name
         redirect_to conn_configuration_path

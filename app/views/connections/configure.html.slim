@@ -1,7 +1,9 @@
 = link_to "Log out", logout_path, :method => :delete
 = link_to "Connections", connection_path
-= link_to "Gate Configuration", configuration_path
 = link_to "VPN Configuration", connection_configure_path
+- if admin?
+  = link_to "Gate Configuration", configuration_path
+
 br
 - @conns.each do |conn|
   = link_to conn, '/connection/configure/'+conn
@@ -19,6 +21,9 @@ br
 
       = f.label :min_user_id, "Virtual IP Subnet"
       = f.text_field :virtual_ip, class: 'form-control', value: @virtual_ip
+
+      = f.label :pre_shared_key, "Pre-Shared Key"
+      = f.text_field :pre_shared_key, class: 'form-control', value: @pre_shared_key
 
       = f.label :aggressive, "Aggressive"
       = f.check_box :aggressive, checked: @aggressive

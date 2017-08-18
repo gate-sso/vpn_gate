@@ -5,6 +5,7 @@ conn <%= conn_name %>
     ike=aes256-sha1-modp1024,3des-sha1-modp1024!
     esp=aes256-sha1,3des-sha1!
     forceencaps=yes
+    leftid=<%= conn_name %>
     leftsubnet=<%= leftsubnet %>
     leftauth=psk
     leftfirewall=yes

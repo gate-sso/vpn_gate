@@ -1,7 +1,8 @@
 = link_to "Log out", logout_path, :method => :delete
 = link_to "Connections", connection_path
-= link_to "Gate Configuration", configuration_path
 = link_to "VPN Configuration", connection_configure_path
+- if admin?
+  = link_to "Gate Configuration", configuration_path
 #connections
 
 javascript:
