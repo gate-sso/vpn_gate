@@ -1,0 +1,2 @@
+class VpnSession < ApplicationRecord
+end

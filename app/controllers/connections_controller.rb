@@ -144,23 +144,28 @@ class ConnectionsController < ApplicationController
         conn_configuration_path = '/connection/configure/' + conn_name
         redirect_to conn_configuration_path
     end
-    def shw
+    def get_history
+        if not logged_in?
+            redirect_to '/'
+            return
+        end
         if params[:username] != nil
             @title = params[:username]
-            @datas = Connection.where(username: @title)
+            @datas = VpnSession.where(username: @title)
         elsif params[:source_ip] != nil
             @title = params[:source_ip]
-            @datas = Connection.where(source_ip: @title)
-        elsif params[:remote_ip] != nil
-            @title = params[:remote_ip]
-            @datas = Connection.where(remote_ip: @title)
+            @datas = VpnSession.where(source_ip: @title)
+        elsif params[:virtual_ip] != nil
+            @title = params[:virtual_ip]
+            @datas = VpnSession.where(virtual_ip: @title)
         elsif params[:protocol] != nil
             @title = params[:protocol]
-            @datas = Connection.where(protocol: @title)
+            @datas = VpnSession.where(protocol: @title)
         else
-            @title = "Connections"
-            @datas = Connection.all
+            @title = "History"
+            @datas = VpnSession.all
         end
+        @conns = get_conns
     end
 end
 

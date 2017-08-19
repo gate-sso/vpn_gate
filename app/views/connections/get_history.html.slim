@@ -1,0 +1,53 @@
+nav.navbar.navbar-default
+  div.container-fluid
+    div.navbar-header
+      a.navbar-brand Gojek VPN
+
+    ul.nav.navbar-nav
+      li
+        = link_to "Connections", connection_path
+      li
+        = link_to "History", connection_history_path
+      li.dropdown
+        a.dropdown-toggle data-toggle="dropdown"
+          | VPN Configuration
+          span.caret
+        ul.dropdown-menu role="menu"
+          - @conns.each do |conn|
+            li
+              = link_to conn, '/connection/configure/'+conn
+      li
+        - if admin?
+          = link_to "Gate Configuration", configuration_path
+
+    ul.nav.navbar-nav.navbar-right
+      li
+        = link_to "Log out", logout_path, :method => :delete
+
+div.container
+  h2 Connection History
+  table.table.table-bordered.table-hover
+    thead
+      tr
+        th Username
+        th Connection
+        th Source IP
+        th Virtual IP
+        th Time Started
+        th Time Ended
+    tbody
+      - @datas.each do |data|
+        tr
+          td
+            = data['username']
+          td
+            = data['protocol']
+          td
+            = data['source_ip']
+          td
+            = data['virtual_ip']
+          td
+            = data.connection_started_time.strftime('%H:%M:%S (%A, %e %B %Y)')
+          td
+            = data.connection_ended_time.strftime('%H:%M:%S (%A, %e %B %Y)')
+
