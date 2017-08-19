@@ -1,14 +1,21 @@
-h1 Log in
+nav.navbar.navbar-default
+  div.container-fluid
+    div.navbar-header
+      a.navbar-brand Gojek VPN
 
+br
+h1.text-center Log in
+br
+br
 .row
   .col-md-6.col-md-offset-3
     = form_for(:session, url: '/') do |f|
 
       = f.label :username
       = f.text_field :username, class: 'form-control'
-
+      br
       = f.label :password
       = f.password_field :password, class: 'form-control'
-
+      br
       = f.submit "Log in", class: "btn btn-primary"
 
