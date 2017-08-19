@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/connection/sas', to: 'connections#get_sas'
     get '/connection/configure', to: 'connections#configure'
     get '/connection/configure/:conn_name', to: 'connections#configure'
+    get '/connection/history', to: 'connections#get_history'
     post '/connection/update', to: 'connections#update'
     get '/configuration', to: 'configurations#show'
     post '/configuration', to: 'configurations#update'
