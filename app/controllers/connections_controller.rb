@@ -9,6 +9,7 @@ class ConnectionsController < ApplicationController
             redirect_to '/'
             return
         end
+        @conns = get_conns
     end
     def get_sas
         if not logged_in?
@@ -99,7 +100,7 @@ class ConnectionsController < ApplicationController
         leftsubnet = params[:connection][:left_subnet]
         rightsourceip = params[:connection][:virtual_ip]
         pre_shared_key = params[:connection][:pre_shared_key]
-        if params[:connection][:aggressive] == '1' then
+        if params[:connection][:aggressive] == 'true' then
             aggressive = 'yes'
         else
             aggressive = 'no'

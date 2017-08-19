@@ -8,6 +8,7 @@ class ConfigurationsController < ApplicationController
         @gate_token = 'default_token'
         @min_user_id = '5000'
         @user_groups = ''
+        @conns = get_conns
         if ENV['USER_GROUPS']
             @user_groups = ENV['USER_GROUPS']
         end

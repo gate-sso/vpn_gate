@@ -6,8 +6,14 @@ nav.navbar.navbar-default
     ul.nav.navbar-nav
       li
         = link_to "Connections", connection_path
-      li
-        = link_to "VPN Configuration", connection_configure_path
+      li.dropdown
+        a.dropdown-toggle data-toggle="dropdown"
+          | VPN Configuration
+          span.caret
+        ul.dropdown-menu role="menu"
+          - @conns.each do |conn|
+            li
+              = link_to conn, '/connection/configure/'+conn
       li
         - if admin?
           = link_to "Gate Configuration", configuration_path
@@ -20,17 +26,19 @@ nav.navbar.navbar-default
   .col-md-6.col-md-offset-3
     = form_for(:configuration, url: '/configuration') do |f|
 
+      h1.text-center Gate Configuration
+      br
       = f.label :gate_url, "Gate Server URL"
       = f.text_field :gate_url, class: 'form-control', value: @gate_url
-
+      br
       = f.label :gate_token, "Gate Token"
       = f.text_field :gate_token, class: 'form-control', value: @gate_token
-
+      br
       = f.label :min_user_id, "Minimum User ID"
       = f.number_field :min_user_id, class: 'form-control', value: @min_user_id
-
+      br
       = f.label :user_groups, "User Groups"
       = f.text_field :user_groups, class: 'form-control', value: @user_groups
-
+      br
       = f.submit "Apply", class: "btn btn-primary"
 
