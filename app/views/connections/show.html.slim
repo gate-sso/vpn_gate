@@ -26,7 +26,7 @@ nav.navbar.navbar-default
 
 div.container
   h2 Active Connections
-  table.table.table-bordered.table-hover
+  table.table.table-bordered.table-hover.table-striped.nowrap.datatable
     thead
       tr
         th Username
@@ -37,31 +37,19 @@ div.container
     tbody#connections
 
 javascript:
-  function conn_json_to_html(conns) {
-    var html_data = "";
-    for (var i in conns) {
-      var conn = conns[i];
-      html_data += "<tr>";
-      html_data += "<td>" + conn["username"] + "</td>";
-      html_data += "<td>" + conn["protocol"] + "</td>";
-      html_data += "<td>" + conn["source_ip"] + "</td>";
-      html_data += "<td>" + conn["virtual_ip"] + "</td>"; 
-      html_data += "<td>" + conn["established"] + "</td>";
-      html_data += "</tr>";
-    }
-    return html_data;
-  }
-  var f, refresh_rate;
-  refresh_rate = 100;
-  setTimeout(f = (function() {
-    $.ajax({
-      url: "/connection/sas"
-    }).done(function(datas) {
-      return $("#connections").html(conn_json_to_html(datas));
-    });
-    if (window.location.pathname == "/connection") {
-        refresh_rate = 3000;
-        return setTimeout(f, refresh_rate);
-    }
-  }), refresh_rate);
+  var table = $('.datatable').DataTable( {
+    "lengthChange": false,
+    ajax: "connection/sas"
+  });
+  var intervalId = null;
+  var varName = function(){
+     if (window.location.pathname == "/connection") {
+        table.ajax.reload(null, false);
+     } else {
+        clearInterval(intervalId);
+     }
+  };
+  $(document).ready(function(){
+    intervalId = setInterval(varName, 1000);
+  });
 

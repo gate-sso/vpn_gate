@@ -35,6 +35,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'rpam-ruby19'
 
 group :development do

@@ -18,18 +18,25 @@ class ConnectionsController < ApplicationController
         end
         v = Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
         conns = []
+        num_data = 0
         v.list_sas do |sa|
             sa.each do |key, value|
+                num_data += 1
                 conn = {}
-                conn['username'] = value['remote-xauth-id']
-                conn['source_ip'] = value['remote-host']
-                conn['virtual_ip'] = value['remote-vips'][0]
-                conn['protocol'] = key
-                conn['established'] = value['established']
+                conn['0'] = value['remote-xauth-id']
+                conn['1'] = key
+                conn['2'] = value['remote-host']
+                conn['3'] = value['remote-vips'][0]
+                conn['4'] = value['established']
                 conns.append(conn)
             end
         end
-        render :json => conns.to_json
+        response = {}
+        response['sEcho'] = 3
+        response['iTotalRecords'] = num_data
+        response['iTotalDisplayRecords'] = num_data
+        response['aaData'] = conns
+        render :json => response.to_json
     end
     def configure
         if not logged_in?

@@ -12,7 +12,9 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery-3.2.1.min
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require_tree .
+//= require dataTables/jquery.dataTables
+
