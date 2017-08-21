@@ -10,7 +10,13 @@ end
 
 # Open connections for vici (strongSwan) and db (SQLite3)
 v = Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
-db = Mysql2::Client.new(:host => "localhost", :username => "root")
+print "Host: "
+host = gets.chomp
+print "Username: "
+username = gets.chomp
+print "Password: "
+password = gets.chomp
+db = Mysql2::Client.new(:host => host, :username => username, :password => password)
 db.select_db('vpn_gate_dev')
 
 active_connections = []
