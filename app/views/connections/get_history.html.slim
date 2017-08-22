@@ -52,6 +52,9 @@ div.container
             = data.connection_ended_time.strftime('%H:%M:%S (%A, %e %B %Y)')
 
 javascript:
-  $('.datatable').DataTable({
-    "lengthChange":false 
+  $(document).ready(function() {
+    $('.datatable').DataTable({
+      "lengthChange":false 
+    });
   });
+
