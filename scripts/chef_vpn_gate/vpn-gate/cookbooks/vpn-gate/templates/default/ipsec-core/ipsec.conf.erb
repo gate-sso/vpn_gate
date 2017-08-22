@@ -8,6 +8,7 @@ conn vpn-main
     ike=aes256-sha1-modp1024,3des-sha1-modp1024!
     esp=aes256-sha1,3des-sha1!
     forceencaps=yes
+    leftid=vpn-main
     leftsubnet=<%= node[:vpn][:leftsubnet] %>
     leftauth=psk
     leftfirewall=yes
@@ -18,13 +19,14 @@ conn vpn-main
     auto=add
 
 <% if node[:vpn][:aggressive] %>
-conn vpn-aggresive
+conn vpn-aggressive
     keyexchange=ikev1
     aggressive=yes
     type=tunnel
     ike=aes256-sha1-modp1024,3des-sha1-modp1024!
     esp=aes256-sha1,3des-sha1!
     forceencaps=yes
+    leftid=vpn-aggressive
     leftsubnet=<%= node[:vpn][:leftsubnet] %>
     leftauth=psk
     leftfirewall=yes
