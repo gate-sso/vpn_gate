@@ -7,14 +7,5 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package "git"
-package "gcc"
-package "make"
+package "libnss-cache"
 
-execute 'clone_libnss-cache' do
-    command "cd /usr/local/lib && git clone https://github.com/gate-sso/libnss-cache.git"
-end
-
-execute 'make_libnss-cache' do
-    command "cd /usr/local/lib/libnss-cache && make install"
-end

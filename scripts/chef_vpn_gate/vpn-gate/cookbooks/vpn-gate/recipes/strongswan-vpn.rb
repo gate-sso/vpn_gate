@@ -6,6 +6,26 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+%w{strongswan, strongswan-plugin-unity, strongswan-plugin-dhcp, strongswan-plugin-xauth-pam}.each do |pkg|
+    package pkg
+end
+
+%w{ipsec.conf ipsec.secrets}.each do |fname|
+    template "/etc/#{fname}" do
+        source "default/ipsec-core/#{fname}.erb"
+    end
+end
+
+template "/etc/strongswan.d/charon.conf" do
+    source "default/ipsec-core/charon.conf.erb"
+end
+
+template "/etc/strongswan.d/charon/xauth-pam.conf" do
+    source "default/ipsec-core/xauth-pam.conf.erb"
+end
+
+=begin
 package "iptables-persistent"
 package "gcc"
 package "make"
@@ -45,3 +65,5 @@ end
 template "/etc/strongswan.d/charon/xauth-pam.conf" do
     source "default/ipsec-core/xauth-pam.conf.erb"
 end
+=end
+

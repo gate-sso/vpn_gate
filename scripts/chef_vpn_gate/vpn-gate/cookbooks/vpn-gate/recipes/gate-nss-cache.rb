@@ -7,10 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-package "git"
-
 execute 'create_nss_configuration' do
-    command "mkdir /etc/nss/"
+    command "mkdir -p /etc/nss/"
 end
 
 template "/etc/nss/nss_http.yml" do
