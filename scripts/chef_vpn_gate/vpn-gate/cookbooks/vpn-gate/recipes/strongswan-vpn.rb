@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w{strongswan, strongswan-plugin-unity, strongswan-plugin-dhcp, strongswan-plugin-xauth-pam}.each do |pkg|
+%w{strongswan libcharon-extra-plugins strongswan-plugin-unity strongswan-plugin-dhcp strongswan-plugin-xauth-pam}.each do |pkg|
     package pkg
 end
 

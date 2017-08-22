@@ -7,7 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-cookbook_file "/lib/*/security/pam_gate.so" do
+security_folder = `cd /lib/*/security && pwd`.strip()
+
+cookbook_file "#{security_folder}/pam_gate.so" do
     source "pam_gate.so"
     owner "root"
     group "root"
