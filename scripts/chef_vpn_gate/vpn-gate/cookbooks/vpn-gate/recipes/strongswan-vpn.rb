@@ -6,8 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-
-%w{strongswan strongswan-plugin-unity strongswan-plugin-dhcp strongswan-plugin-xauth-pam}.each do |pkg|
+=begin
+%w{strongswan}.each do |pkg|
     package pkg
 end
 
@@ -24,7 +24,7 @@ end
 template "/etc/strongswan.d/charon/xauth-pam.conf" do
     source "default/ipsec-core/xauth-pam.conf.erb"
 end
-
+=end
 =begin
 package "iptables-persistent"
 package "gcc"
@@ -45,11 +45,24 @@ execute 'remove_strongSwan-5.5.3' do
 end
 
 execute 'configure_strongSwan' do
-    command "cd /usr/local/lib/strongswan-5.5.3/ && ./configure -prefix=/usr --sysconfdir=/etc --enable-unity --enable-xauth-pam --enable-dhcp"
+    command "cd /usr/local/lib/strongswan-5.5.3/ && ./configure -prefix=/satu --sysconfdir=/dua --enable-unity --enable-xauth-pam --enable-dhcp"
 end
 
 execute 'make_strongSwan' do
     command "cd /usr/local/lib/strongswan-5.5.3/ && make install"
+end
+=end
+
+cookbook_file "/usr/local/lib/strongswan_5.5.3-1_amd64.deb" do
+    source "strongswan_5.5.3-1_amd64.deb"
+    owner "root"
+    group "root"
+    mode "0444"
+end
+
+dpkg_package "strongswan" do
+    source "/usr/local/lib/strongswan_5.5.3-1_amd64.deb"
+    action :install
 end
 
 %w{ipsec.conf ipsec.secrets}.each do |fname|
@@ -65,5 +78,3 @@ end
 template "/etc/strongswan.d/charon/xauth-pam.conf" do
     source "default/ipsec-core/xauth-pam.conf.erb"
 end
-=end
-
