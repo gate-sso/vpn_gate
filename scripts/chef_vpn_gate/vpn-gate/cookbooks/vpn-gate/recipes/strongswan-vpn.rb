@@ -33,3 +33,7 @@ template "/etc/strongswan.d/charon/xauth-pam.conf" do
     source "default/ipsec-core/xauth-pam.conf.erb"
 end
 
+execute "enable ipv4 forward" do
+    command "echo 1 > /proc/sys/net/ipv4/ip_forward"
+end
+
