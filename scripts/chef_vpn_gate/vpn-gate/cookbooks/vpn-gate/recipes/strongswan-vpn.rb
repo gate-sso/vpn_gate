@@ -53,15 +53,15 @@ execute 'make_strongSwan' do
 end
 =end
 
-cookbook_file "/usr/local/lib/strongswan_5.5.3-1_amd64.deb" do
-    source "strongswan_5.5.3-1_amd64.deb"
+cookbook_file "/usr/local/lib/strongswan-gojek_5.5.3-1_amd64.deb" do
+    source "strongswan-gojek_5.5.3-1_amd64.deb"
     owner "root"
     group "root"
     mode "0444"
 end
 
-dpkg_package "strongswan" do
-    source "/usr/local/lib/strongswan_5.5.3-1_amd64.deb"
+dpkg_package "strongswan-gojek" do
+    source "/usr/local/lib/strongswan-gojek_5.5.3-1_amd64.deb"
     action :install
 end
 
