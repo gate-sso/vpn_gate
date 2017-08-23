@@ -13,18 +13,21 @@ class SessionsController < ApplicationController
       log_in username
       redirect_to '/connection'
       return
-    elsif Rpam.auth(username, password, :service => 'common-auth') == true then
+    elsif Rpam.auth(username, password, :service => 'gate-sso') == true then
       if ENV['USER_GROUPS'] then
         user_groups = ENV['USER_GROUPS'].split(';')
         user_groups.each do |group|
           group = group.strip()
           if (`id -G #{username}`.include? group or `groups #{username}`.include? group) then
-            log_in username
+            log_in ENV['ADMIN_USERNAME']
             redirect_to '/connection'
             return
           end
         end
       end
+      log_in username
+      redirect_to '/connection'
+      return
     end
     redirect_to '/'
   end

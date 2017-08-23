@@ -5,7 +5,7 @@ default: &default
   host: <%= ENV['VPN_GATE_DB_HOST'] || 'localhost'%>
   port: <%= ENV['VPN_GATE_DB_PORT'] || '3306'%>
   username: <%= ENV['VPN_GATE_DB_USER'] || 'vpn_gate'%>
-  password: <%= ENV['VPN_GATE_DB_PASSWORD'] || 'password' %>
+  password: <%= ENV['VPN_GATE_DB_PASSWORD'] || 'asdfz123' %>
 
 
 development:

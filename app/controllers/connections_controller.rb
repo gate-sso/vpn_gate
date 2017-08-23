@@ -17,6 +17,15 @@ class ConnectionsController < ApplicationController
             return
         end
         v = Vici::Connection.new(UNIXSocket.new("/var/run/charon.vici"))
+        if not v then
+            response = {}
+            response['sEcho'] = 3
+            response['iTotalRecords'] = 0
+            response['iTotalDisplayRecords'] = 0
+            response['aaData'] = []
+            render :json => response.to_json
+            return
+        end
         conns = []
         num_data = 0
         v.list_sas do |sa|
@@ -39,7 +48,7 @@ class ConnectionsController < ApplicationController
         render :json => response.to_json
     end
     def configure
-        if not logged_in?
+        if not admin?
             redirect_to '/'
             return
         end

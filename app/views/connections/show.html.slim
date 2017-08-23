@@ -8,16 +8,16 @@ nav.navbar.navbar-default
         = link_to "Connections", connection_path
       li
         = link_to "History", connection_history_path
-      li.dropdown
-        a.dropdown-toggle data-toggle="dropdown"
-          | VPN Configuration
-          span.caret
-        ul.dropdown-menu role="menu"
-          - @conns.each do |conn|
-            li
-              = link_to conn, '/connection/configure/'+conn
-      li
-        - if admin?
+      - if admin?
+        li.dropdown
+          a.dropdown-toggle data-toggle="dropdown"
+            | VPN Configuration
+            span.caret
+          ul.dropdown-menu role="menu"
+            - @conns.each do |conn|
+              li
+                = link_to conn, '/connection/configure/'+conn
+        li
           = link_to "Gate Configuration", configuration_path
 
     ul.nav.navbar-nav.navbar-right
@@ -37,6 +37,7 @@ div.container
     tbody#connections
 
 javascript:
+  $.fn.dataTable.ext.errMode = 'throw';
   var table = $('.datatable').DataTable( {
     "lengthChange": false,
     ajax: "connection/sas"
