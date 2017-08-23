@@ -7,10 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-=begin
 package "libcurl4-openssl-dev"
 package "libpam0g-dev"
-=end
+
 security_folder = `cd /lib/*/security && pwd`.strip()
 
 cookbook_file "#{security_folder}/pam_gate.so" do
