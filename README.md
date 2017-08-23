@@ -4,16 +4,13 @@
 
 VPN Gate allows you setup your own IPSec server with MFA. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby 2.3.4
 
-Things you may want to cover:
-
-* Ruby 2.3.4 or JRuby 9.1.x
-
-* You need to setup IPSec server using *scripts* directory's Chef Solo scripts.
+* You need to setup IPSec server using *setup_ipsec.sh* directory's Chef Solo scripts.
 
 * VPN Gate requires gate_nss_cache and other software to operate appropriately.
+
+* You will need to run scripts inside app to databases.
 
 * To configure database, please run rake db:migrate after setting appropriate variables defined in *config/db/database.yml*
 
@@ -23,7 +20,6 @@ Things you may want to cover:
 
 VPN Gate has two components, IPSec VPN Server, second it has IPSec Web Interface
 =======
-* ...
 
 Setting Up Gate VPN Server
 =================
@@ -35,11 +31,11 @@ Server Setup
 ------------
 Change the attribute/default.rb to suit the needs of the VPN, then run the chef-solo configuration.
 
-<tt>chef-solo -c solo.rb -j solo.json</tt>
+<tt>./setup_ipsec.sh</tt>
 
-Setup PAM URL and token with GATE_URL and GATE_TOKEN environment variable.
+Setup PAM URL, token, NSS URL, and NSS API KEY with GATE_URL, GATE_TOKEN, NSS_GATE_URL, NSS_API_KEY environment variable.
 
-Default installation consists of PAM and StrongSwan installation, nss and lib-nss can be added by editing solo.json file. The installed file is located in /usr/local/lib.
+Default installation consists of PAM, StrongSwan, NSS, and lib-nss installation, it can be changed by editing solo.json file.
 
 Make sure there is no installation of StrongSwan (along with it module, try apt autoremove) in the machine, before starting the chef-solo. Also, compilation of the pam module needs additional -lpam flag to be recognized by StrongSwan charon.
 
