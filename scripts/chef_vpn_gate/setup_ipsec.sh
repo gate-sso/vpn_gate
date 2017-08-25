@@ -11,5 +11,15 @@ which chef-solo > /dev/null
 if [ $? == 1 ]; then
   echo "chef-solo is not installed. You might want to run 'apt install chef.'" && exit 1;
 fi
-echo 'Running chef-solo...'
-chef-solo -c solo.rb -j solo.json
+if [ -e /etc/ipsec.conf ]; then
+  echo "You already have ipsec configuration in the machine."
+  read -p "Do you want to install and overwrite the configuration (y/n) " CONT
+  if [ "$CONT" = "y" ]; then
+    echo 'Running chef-solo'
+    chef-solo -c solo.rb -j solo.json
+  fi
+else
+  echo 'Running chef-solo...'
+  chef-solo -c solo.rb -j solo.json
+fi
+
