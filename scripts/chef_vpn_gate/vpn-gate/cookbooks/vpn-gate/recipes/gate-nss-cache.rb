@@ -26,7 +26,11 @@ cookbook_file "/bin/gate-nss-cache" do
     mode  "0755"
 end
 
-cron 'adding cron for gate nss cache ' do
+execute "run gate-nss-cache" do
+    command "GATE_CONFIG_FILE=/etc/nss/nss_http.yml && /bin/gate-nss-cache"
+end
+
+cron "adding cron for gate nss cache" do
     hour '*/3'
     command %W{
         GATE_CONFIG_FILE="/etc/nss/nss_http.yml"
