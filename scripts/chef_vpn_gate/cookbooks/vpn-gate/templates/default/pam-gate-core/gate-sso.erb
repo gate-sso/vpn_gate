@@ -1,2 +1,0 @@
-auth sufficient pam_gate.so url="<%= ENV['GATE_URL'] %>" token="<%= ENV['GATE_TOKEN'] %>" min_user_id=<%= node[:pam_gate][:min_user_id] %>
-account sufficient pam_gate.so url="<%= ENV['GATE_URL'] %>" token="<%= ENV['GATE_TOKEN'] %>" min_user_id=<%= node[:pam_gate][:min_user_id] %>
