@@ -1,0 +1,8 @@
+client strongswan {
+
+	ipaddr = 0.0.0.0
+	netmask = 0
+	secret = <%= node['vpn']['radius']['radius_secret']%>
+	require_message_authenticator = no
+	
+}

@@ -1,0 +1,37 @@
+config setup
+    charondebug="ike 1, knl 2, cfg 0"
+    uniqueids=no
+
+conn vpn-main-ike2
+    keyexchange=ikev2
+    type=tunnel
+    ike=aes256-sha1-modp1024,3des-sha1-modp1024!
+    esp=aes256-sha1,3des-sha1!
+    forceencaps=yes
+    lifetime=1800
+    left=%any
+    leftid=@<%= node['vpn']['ipsec']['fqdn'] %>
+    leftcert=/etc/ipsec.d/certs/<%= node['vpn']['ipsec']['fqdn'] %>.pem
+    leftsendcert=always
+    leftsubnet=<%= node['vpn']['ipsec']['leftsubnet'] %>
+    leftfirewall=yes
+    right=%any
+    rightid=%any
+    rightauth=eap-radius
+    rightsourceip=<%= node['vpn']['ipsec']['rightsourceip']%>
+    rightsendcert=never
+    eap_identity=%identity
+    auto=add
+
+conn vpn-radius
+	keyexchange=ikev2
+	type=transport
+	forceencaps=yes
+	left=%any
+	leftid=@<%= node['vpn']['ipsec']['fqdn']%>
+	leftcert=/etc/ipsec.d/certs/<%= node['vpn']['ipsec']['fqdn']%>.pem
+	leftsendcert=always
+	leftfirewall=yes
+	right=<%= node['vpn']['ipsec']['radius_fqdn']%>
+	rightid=@<%= node['vpn']['ipsec']['radius_fqdn']%>
+	auto=route
