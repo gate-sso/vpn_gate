@@ -1,0 +1,20 @@
+# ipsec.conf - strongSwan IPsec configuration file
+
+# basic configuration
+
+config setup
+	charondebug="ike 1, knl 2, cfg 0"
+	uniqueids=no
+
+conn vpn-radius
+	keyexchange=ikev2
+	type=transport
+	forceencaps=yes
+	left=%any
+	leftid=@<%= node['vpn']['ipsec']['fqdn']%>
+	leftcert=/etc/ipsec.d/certs/<%= node['vpn']['ipsec']['fqdn']%>.pem
+	leftsendcert=always
+	leftfirewall=yes
+	right=%any
+	rightid=@*.vpn.golabs.io
+	auto=add

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+USERNAME=$1
+CHALLENGE=$2
+NTRESPONSE=$3
+IPADDRESS=$4
+
+GATEURL="https://gate.gojek.co.id/profile/authenticate_ms_chap?user=$USERNAME&challenge=$CHALLENGE&response=$NTRESPONSE&addresses=$IPADDRESS"
+curl -s  $GATEURL

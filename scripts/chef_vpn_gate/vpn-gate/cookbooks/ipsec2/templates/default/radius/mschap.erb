@@ -1,0 +1,3 @@
+mschap {
+	ntlm_auth = "/usr/local/bin/gate_auth.sh %{User-Name} %{mschap:Challenge} %{mschap:NT-Response} %{NAS-IP-Address}"
+}
