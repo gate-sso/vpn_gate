@@ -50,6 +50,14 @@ action :setup do
         source "default/ipsec/eap-radius.conf.erb"
     end
     
+    template "/etc/sysctl.conf" do
+        source "default/ipsec/sysctl.conf.erb"
+    end
+
+    execute "load sysctl" do
+      command "sysctl -p"
+    end
+
   else app_name == "ipsec_radius"
     
     remote_file '/etc/ipsec.d/cacerts/isrgrootx1.pem' do
@@ -77,3 +85,4 @@ action :setup do
   end
   
 end
+
