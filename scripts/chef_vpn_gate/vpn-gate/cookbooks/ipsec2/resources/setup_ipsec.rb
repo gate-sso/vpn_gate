@@ -50,8 +50,8 @@ action :setup do
         source "default/ipsec/eap-radius.conf.erb"
     end
     
-    template "/etc/sysctl.conf" do
-        source "default/ipsec/sysctl.conf.erb"
+    execute "uncomment the ip forward in sysctl.conf" do
+        command "sed  -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf"
     end
 
     execute "load sysctl" do
