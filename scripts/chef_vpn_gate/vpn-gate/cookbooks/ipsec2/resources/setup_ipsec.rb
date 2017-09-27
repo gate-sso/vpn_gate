@@ -50,6 +50,14 @@ action :setup do
         source "default/ipsec/eap-radius.conf.erb"
     end
     
+    execute "uncomment the ip forward in sysctl.conf" do
+        command "sed  -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf"
+    end
+
+    execute "load sysctl" do
+      command "sysctl -p"
+    end
+
   else app_name == "ipsec_radius"
     
     remote_file '/etc/ipsec.d/cacerts/isrgrootx1.pem' do
@@ -77,3 +85,4 @@ action :setup do
   end
   
 end
+
