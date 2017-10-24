@@ -28,14 +28,8 @@ action :setup do
       action :create
     end
   
-    remote_file '/etc/ipsec.d/aacerts/isrgrootx1.pem' do
-      source 'https://letsencrypt.org/certs/isrgrootx1.pem.txt'
-      action :create
-    end
-  
-    remote_file '/etc/ipsec.d/aacerts/letsencryptauthorityx3.pem' do
-      source 'https://letsencrypt.org/certs/letsencryptauthorityx3.pem.txt'
-      action :create
+    execute 'Copy DST Root CA to Strongswan' do
+      command 'cp /etc/ssl/certs/DST_Root_CA_X3.pem /etc/ipsec.d/cacerts/DST_Root_CA_X3.pem'
     end
   
     template "/etc/ipsec.conf" do
