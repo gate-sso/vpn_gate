@@ -1,24 +1,24 @@
 # README
 
-##VPN GATE is IPSec server WebUI, Management console with MFA
+##VPN GATE is an IPSec server WebUI, Management console with MFA
 
-VPN Gate allows you setup your own IPSec server with MFA. 
+VPN Gate allows you set up your own IPSec server with MFA. 
 
 * Ruby 2.3.4
 
-* You need to setup IPSec server using *setup_ipsec.sh* directory's Chef Solo scripts.
+* You need to set up IPSec server using *setup_ipsec.sh* directory's Chef Solo scripts.
 
 * VPN Gate requires gate_nss_cache and other software to operate appropriately.
 
 * You will need to run scripts inside app to databases.
 
-* To configure database, please run rake db:migrate after setting appropriate variables defined in *config/db/database.yml*
+* To configure the database, please run rake db:migrate after setting appropriate variables defined in *config/db/database.yml*
 
-* To Run tests please run rake spec
+* To Run tests, please run 'rake spec'
 
 ##Deployment instructions
 
-VPN Gate has two components, IPSec VPN Server, second it has IPSec Web Interface
+VPN Gate has two components: IPSec VPN Server and IPSec Web Interface
 =======
 
 Setting Up Gate VPN Server
@@ -29,15 +29,15 @@ This also uses NSS to sync users and MFA (using PAM) to authenticate.
 
 Server Setup
 ------------
-Change the attribute/default.rb to suit the needs of the VPN, then run the chef-solo configuration.
+Change the attribute/default.rb to suit the needs of the VPN, and then run the chef-solo configuration.
 
 <tt>./setup_ipsec.sh</tt>
 
-Setup PAM URL, token, NSS URL, and NSS API KEY with GATE_URL, GATE_TOKEN, NSS_GATE_URL, NSS_API_KEY environment variable.
+Set up PAM URL, token, NSS URL, and NSS API KEY with GATE_URL, GATE_TOKEN, NSS_GATE_URL, NSS_API_KEY environment variables.
 
 Default installation consists of PAM, StrongSwan, NSS, and lib-nss installation, it can be changed by editing solo.json file.
 
-Make sure there is no installation of StrongSwan (along with it module, try apt autoremove) in the machine, before starting the chef-solo. Also, compilation of the pam module needs additional -lpam flag to be recognized by StrongSwan charon.
+Before starting the chef-solo, make sure there is no installation of StrongSwan (along with it module, try apt autoremove) in the machine. Also, compilation of the pam module needs additional -lpam flag to be recognized by StrongSwan charon.
 
 Change the left subnet inside default attributes to split tunnel (left subnet is the tunnelled adress).
 
