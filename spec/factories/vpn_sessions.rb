@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :vpn_session do
     username "MyString"
     source_ip "MyString"

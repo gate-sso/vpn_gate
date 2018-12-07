@@ -1,25 +1,15 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
-
 gem 'mysql2', platform: :ruby
-
-gem 'jdbc-mysql', platform: :jruby
-gem 'activerecord-jdbc-adapter', github: "jruby/activerecord-jdbc-adapter", branch: "rails-5", platform: :jruby
-gem 'therubyrhino', platform: :jruby
 
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
 end
 
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.1.6.1'
 gem 'vici'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -28,8 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'puma'
 gem 'slim-rails'
-gem 'twitter-bootstrap-rails'
-gem 'bootstrap-sass'
+gem 'bootstrap'
 gem "font-awesome-rails"
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
@@ -47,5 +36,3 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170819055746) do
 
-  create_table "vpn_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "vpn_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "username"
     t.string "source_ip"
     t.string "virtual_ip"
