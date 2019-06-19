@@ -6,10 +6,17 @@ action :setup do
   
   package "letsencrypt"
   package "strongswan"
-  package "strongswan-plugin-eap-radius"
-  package "strongswan-plugin-curl"
+
+  if node["platform"] == "ubuntu" and node["platform_version"] == "18.04"
+    package "libstrongswan-extra-plugins"
+    package "libcharon-standard-plugins"
+    package "libcharon-extra-plugins"
+  else
+    package "strongswan-plugin-eap-radius"
+    package "strongswan-plugin-curl"
+  end
   
-  execute 'create certificates using letsenrypt' do
+  execute 'create certificates using letsencrypt' do
       command "letsencrypt certonly --standalone -d #{node['vpn']['ipsec']['fqdn']} -m systems@go-jek.com --agree-tos"
       not_if { ::File.file?("/etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/privkey.pem") }
   end
