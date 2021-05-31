@@ -7,7 +7,7 @@ action :setup do
   package "letsencrypt"
   package "strongswan"
 
-  if node["platform"] == "ubuntu" and node["platform_version"] == "18.04"
+  if node["platform"] == "ubuntu" and (node["platform_version"] == "18.04" or node["platform_version"] == "20.04")
     package "libstrongswan-extra-plugins"
     package "libcharon-standard-plugins"
     package "libcharon-extra-plugins"
@@ -21,11 +21,11 @@ action :setup do
       not_if { ::File.file?("/etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/privkey.pem") }
   end
 
-  execute 'copy certificates to /etc/ipsec.d/private/' do
+  execute 'copy private key to /etc/ipsec.d/private/' do
     command "cp /etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/privkey.pem /etc/ipsec.d/private/#{node['vpn']['ipsec']['fqdn']}.pem"
   end
   
-  execute 'copy certificates to /etc/ipsec.d/private/' do
+  execute 'copy certificates to /etc/ipsec.d/certs/' do
     command "cp /etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/cert.pem /etc/ipsec.d/certs/#{node['vpn']['ipsec']['fqdn']}.pem"
   end
      
