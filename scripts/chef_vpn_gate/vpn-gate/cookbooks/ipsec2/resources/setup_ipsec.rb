@@ -115,9 +115,14 @@ action :setup do
 
   end
 
-  service "strongswan" do
-    action [:enable, :restart]
+
+  if node["platform"] == "ubuntu" and (node["platform_version"] == "18.04" or node["platform_version"] == "20.04")
+    service "strongswan-starter" do
+      action [:enable, :restart]
+    end
+  else
+    service "strongswan" do
+      action [:enable, :restart]
+    end
   end
-
 end
-
