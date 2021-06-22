@@ -16,19 +16,6 @@ action :setup do
     package "strongswan-plugin-curl"
   end
 
-  execute 'create certificates using letsencrypt' do
-      command "letsencrypt certonly --standalone -d #{node['vpn']['ipsec']['fqdn']} -m systems@go-jek.com --agree-tos"
-      not_if { ::File.file?("/etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/privkey.pem") }
-  end
-
-  execute 'copy private key to /etc/ipsec.d/private/' do
-    command "cp /etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/privkey.pem /etc/ipsec.d/private/#{node['vpn']['ipsec']['fqdn']}.pem"
-  end
-
-  execute 'copy certificates to /etc/ipsec.d/certs/' do
-    command "cp /etc/letsencrypt/live/#{node['vpn']['ipsec']['fqdn']}/cert.pem /etc/ipsec.d/certs/#{node['vpn']['ipsec']['fqdn']}.pem"
-  end
-
   if app_name == "ipsec"
     remote_file '/etc/ssl/certs/isrgrootx1.pem' do
         source 'https://letsencrypt.org/certs/isrgrootx1.pem'
