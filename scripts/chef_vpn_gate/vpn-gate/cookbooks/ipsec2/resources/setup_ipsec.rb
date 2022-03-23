@@ -17,38 +17,9 @@ action :setup do
   end
 
   if app_name == "ipsec"
-    remote_file '/etc/ssl/certs/isrgrootx1.pem' do
-        source 'https://letsencrypt.org/certs/isrgrootx1.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/isrg-root-x1-cross-signed.pem' do
-        source 'https://letsencrypt.org/certs/isrg-root-x1-cross-signed.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/isrg-root-x2.pem' do
-        source 'https://letsencrypt.org/certs/isrg-root-x2.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/isrg-root-x2-cross-signed.pem' do
-        source 'https://letsencrypt.org/certs/isrg-root-x2-cross-signed.pem'
-        action :create
-    end
 
     remote_file '/etc/ssl/certs/lets-encrypt-r3.pem' do
         source 'https://letsencrypt.org/certs/lets-encrypt-r3.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/lets-encrypt-r3-cross-signed.pem' do
-        source 'https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/lets-encrypt-e1.pem' do
-        source 'https://letsencrypt.org/certs/lets-encrypt-e1.pem'
         action :create
     end
 
