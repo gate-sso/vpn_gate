@@ -22,11 +22,6 @@ action :setup do
         action :create
     end
 
-    remote_file '/etc/ssl/certs/isrg-root-x1-cross-signed.pem' do
-        source 'https://letsencrypt.org/certs/isrg-root-x1-cross-signed.pem'
-        action :create
-    end
-
     remote_file '/etc/ssl/certs/isrg-root-x2.pem' do
         source 'https://letsencrypt.org/certs/isrg-root-x2.pem'
         action :create
@@ -39,11 +34,6 @@ action :setup do
 
     remote_file '/etc/ssl/certs/lets-encrypt-r3.pem' do
         source 'https://letsencrypt.org/certs/lets-encrypt-r3.pem'
-        action :create
-    end
-
-    remote_file '/etc/ssl/certs/lets-encrypt-r3-cross-signed.pem' do
-        source 'https://letsencrypt.org/certs/lets-encrypt-r3-cross-signed.pem'
         action :create
     end
 
